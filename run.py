@@ -1,8 +1,12 @@
 '''
 File for running churn_library functions
 '''
+# %%
+from churn_library import import_data
+
 
 # %%Import data
+print(import_data('./data/bank_data.csv'))
 
 
 # %% Perform EDA
