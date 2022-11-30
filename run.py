@@ -6,8 +6,8 @@ from churn_library import import_data
 
 
 # %%Import data
-print(import_data('./data/bank_data.csv'))
-
+data_df = import_data('./data/bank_data.csv')
+print(data_df)
 
 # %% Perform EDA
 

@@ -26,16 +26,19 @@ def import_data(pth):
    return df
 
 
-# def perform_eda(df):
-#     '''
-#     perform eda on df and save figures to images folder
-#     input:
-#             df: pandas dataframe
+def perform_eda(df):
+   '''
+   perform eda on df and save figures to images folder
+   input:
+        df: pandas dataframe
 
-#     output:
-#             None
-#     '''
-#         pass
+   output:
+        None
+   '''
+   print('Shape: \n')
+   print(df.shape)
+
+
 
 
 # def encoder_helper(df, category_lst, response):
