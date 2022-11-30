@@ -35,8 +35,17 @@ def perform_eda(df):
    output:
         None
    '''
-   print('Shape: \n')
+   print('--- EDA ---')
+   print('Shape:')
    print(df.shape)
+   print('Null Values:')
+   print(df.isnull().sum())
+   print('Describe')
+   print(df.describe())
+
+
+
+
 
 
 
