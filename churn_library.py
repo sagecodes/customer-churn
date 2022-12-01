@@ -5,7 +5,8 @@
 import os
 
 import pandas as pd
-
+import matplotlib.pyplot as plt
+import seaborn as sns; sns.set()
 
 
 os.environ['QT_QPA_PLATFORM']='offscreen'
@@ -35,18 +36,64 @@ def perform_eda(df):
    output:
         None
    '''
+
    print('--- EDA ---')
    print('Shape:')
    print(df.shape)
-   print('Null Values:')
+   print('\nNull Values:')
    print(df.isnull().sum())
-   print('Describe')
+   print('\nDescribe')
    print(df.describe())
 
 
+   cat_columns = [
+       'Gender',
+       'Education_Level',
+       'Marital_Status',
+       'Income_Category',
+       'Card_Category'                
+   ]
 
+   quant_columns = [
+       'Customer_Age',
+       'Dependent_count', 
+       'Months_on_book',
+       'Total_Relationship_Count', 
+       'Months_Inactive_12_mon',
+       'Contacts_Count_12_mon', 
+       'Credit_Limit', 
+       'Total_Revolving_Bal',
+       'Avg_Open_To_Buy', 
+       'Total_Amt_Chng_Q4_Q1', 
+       'Total_Trans_Amt',
+       'Total_Trans_Ct', 
+       'Total_Ct_Chng_Q4_Q1', 
+       'Avg_Utilization_Ratio'
+   ]
 
+   # Save graph: Attrition_Flag for Existing Customer
+   df['Churn'] = df['Attrition_Flag'].apply(lambda val: 0 if val == "Existing Customer" else 1)
+   fig = plt.figure(figsize=(20,10)) 
+   df['Churn'].hist();
+   plt.savefig('images/Attrition_Flag_Existing_Customer.png')
+   plt.close(fig)
 
+   # 
+   plt.figure(figsize=(20,10)) 
+   df['Customer_Age'].hist();
+
+   plt.figure(figsize=(20,10)) 
+   df.Marital_Status.value_counts('normalize').plot(kind='bar');
+
+   plt.figure(figsize=(20,10)) 
+   # distplot is deprecated. Use histplot instead
+   # sns.distplot(df['Total_Trans_Ct']);
+   # Show distributions of 'Total_Trans_Ct' and add a smooth curve obtained using a kernel density estimate
+   sns.histplot(df['Total_Trans_Ct'], stat='density', kde=True);
+
+   plt.figure(figsize=(20,10)) 
+   sns.heatmap(df.corr(), annot=False, cmap='Dark2_r', linewidths = 2)
+   plt.show()
 
 
 

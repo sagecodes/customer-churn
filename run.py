@@ -5,7 +5,7 @@ File for running churn_library functions
 from churn_library import import_data, perform_eda
 
 
-# %%Import data
+# %% Import data
 data_df = import_data('./data/bank_data.csv')
 print(data_df)
 
