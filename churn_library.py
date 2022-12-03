@@ -80,9 +80,12 @@ def perform_eda(df):
    plt.close(fig)
    print('saved Attrition graph at: images/Attrition_Flag_Existing_Customer.png')
 
-   # 
+   # save graph: Customer_Age
    plt.figure(figsize=(20,10)) 
    df['Customer_Age'].hist();
+   plt.savefig('images/Customer_age.png')
+   plt.close(fig)
+   print('saved Customer Age graph at: images/Customer_Age.png')
 
    plt.figure(figsize=(20,10)) 
    df.Marital_Status.value_counts('normalize').plot(kind='bar');
