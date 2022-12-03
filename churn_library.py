@@ -94,7 +94,14 @@ def perform_eda(df):
    # distplot is deprecated. Use histplot instead
    # sns.distplot(df['Total_Trans_Ct']);
    # Show distributions of 'Total_Trans_Ct' and add a smooth curve obtained using a kernel density estimate
-   sns.histplot(df['Total_Trans_Ct'], stat='density', kde=True);
+   histplot = sns.histplot(df['Total_Trans_Ct'], stat='density', kde=True);
+   fig = histplot.get_figure()
+   fig.savefig('images/Total_Trans_Ct.png')
+#    plt.close(fig)
+   print('saved total transaction graph at: images/Customer_Age.png')
+
+
+
 
    plt.figure(figsize=(20,10)) 
    sns.heatmap(df.corr(), annot=False, cmap='Dark2_r', linewidths = 2)
