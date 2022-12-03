@@ -90,6 +90,8 @@ def perform_eda(df):
    plt.figure(figsize=(20,10)) 
    df.Marital_Status.value_counts('normalize').plot(kind='bar');
 
+
+
    plt.figure(figsize=(20,10)) 
    # distplot is deprecated. Use histplot instead
    # sns.distplot(df['Total_Trans_Ct']);
@@ -97,16 +99,15 @@ def perform_eda(df):
    histplot = sns.histplot(df['Total_Trans_Ct'], stat='density', kde=True);
    fig = histplot.get_figure()
    fig.savefig('images/Total_Trans_Ct.png')
-#    plt.close(fig)
-   print('saved total transaction graph at: images/Customer_Age.png')
+   print('saved total transaction graph at: images/Total_Trans_Ct.png')
 
 
-
-
+   # pairwise correlation
    plt.figure(figsize=(20,10)) 
-   sns.heatmap(df.corr(), annot=False, cmap='Dark2_r', linewidths = 2)
-   plt.show()
-
+   corr_plot = sns.heatmap(df.corr(), annot=False, cmap='Dark2_r', linewidths = 2)
+   fig = corr_plot.get_figure()
+   fig.savefig('images/correlation.png')
+   print('saved correlation graph at: images/correlation.png')
 
 
 # def encoder_helper(df, category_lst, response):
