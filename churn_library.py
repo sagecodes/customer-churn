@@ -46,30 +46,30 @@ def perform_eda(df):
    print(df.describe())
 
 
-   cat_columns = [
-       'Gender',
-       'Education_Level',
-       'Marital_Status',
-       'Income_Category',
-       'Card_Category'                
-   ]
+#    cat_columns = [
+#        'Gender',
+#        'Education_Level',
+#        'Marital_Status',
+#        'Income_Category',
+#        'Card_Category'                
+#    ]
 
-   quant_columns = [
-       'Customer_Age',
-       'Dependent_count', 
-       'Months_on_book',
-       'Total_Relationship_Count', 
-       'Months_Inactive_12_mon',
-       'Contacts_Count_12_mon', 
-       'Credit_Limit', 
-       'Total_Revolving_Bal',
-       'Avg_Open_To_Buy', 
-       'Total_Amt_Chng_Q4_Q1', 
-       'Total_Trans_Amt',
-       'Total_Trans_Ct', 
-       'Total_Ct_Chng_Q4_Q1', 
-       'Avg_Utilization_Ratio'
-   ]
+#    quant_columns = [
+#        'Customer_Age',
+#        'Dependent_count', 
+#        'Months_on_book',
+#        'Total_Relationship_Count', 
+#        'Months_Inactive_12_mon',
+#        'Contacts_Count_12_mon', 
+#        'Credit_Limit', 
+#        'Total_Revolving_Bal',
+#        'Avg_Open_To_Buy', 
+#        'Total_Amt_Chng_Q4_Q1', 
+#        'Total_Trans_Amt',
+#        'Total_Trans_Ct', 
+#        'Total_Ct_Chng_Q4_Q1', 
+#        'Avg_Utilization_Ratio'
+#    ]
 
    # Save graph: Attrition_Flag for Existing Customer
 
@@ -110,20 +110,28 @@ def perform_eda(df):
    print('saved correlation graph at: images/correlation.png')
 
 
-# def encoder_helper(df, category_lst, response):
-#     '''
-#     helper function to turn each categorical column into a new column with
-#     propotion of churn for each category - associated with cell 15 from the notebook
+def encoder_helper(df, category_lst, response):
+   '''
+    helper function to turn each categorical column into a new column with
+    propotion of churn for each category - associated with cell 15 from the notebook
 
-#     input:
-#             df: pandas dataframe
-#             category_lst: list of columns that contain categorical features
-#             response: string of response name [optional argument that could be used for naming variables or index y column]
+    input:
+            df: pandas dataframe
+            category_lst: list of columns that contain categorical features
+            response: string of response name [optional argument that could be used for naming variables or index y column]
 
-#     output:
-#             df: pandas dataframe with new columns for
-#     '''
-#     pass
+    output:
+            df: pandas dataframe with new columns for
+   '''
+    # gender encoded column
+   gender_lst = []
+   gender_groups = df.groupby('Gender').mean()['Churn']
+
+   for val in df['Gender']:
+      gender_lst.append(gender_groups.loc[val])
+
+   df['Gender_Churn'] = gender_lst    
+   
 
 
 # def perform_feature_engineering(df, response):
