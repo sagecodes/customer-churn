@@ -130,23 +130,26 @@ def encoder_helper(df, category_lst, response=None):
       for val in df[col]:
          lst.append(groups.loc[val])
 
-      df[col] = lst
+      df[col+'_'+'Churn'] = lst
       return df
    
 
 
-# def perform_feature_engineering(df, response):
-#     '''
-#     input:
-#               df: pandas dataframe
-#               response: string of response name [optional argument that could be used for naming variables or index y column]
+def perform_feature_engineering(df, response):
+    '''
+    input:
+              df: pandas dataframe
+              response: string of response name [optional argument that could be used for naming variables or index y column]
 
-#     output:
-#               X_train: X training data
-#               X_test: X testing data
-#               y_train: y training data
-#               y_test: y testing data
-#     '''
+    output:
+              X_train: X training data
+              X_test: X testing data
+              y_train: y training data
+              y_test: y testing data
+    '''
+
+
+
 
 # def classification_report_image(y_train,
 #                                 y_test,
