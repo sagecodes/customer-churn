@@ -121,10 +121,8 @@ def encoder_helper(df, category_lst, response=None):
             response: string of response name [optional argument that could be used for naming variables or index y column]
 
     output:
-            df: pandas dataframe with new columns for
+            df: pandas dataframe with new columns for each category in list
    '''
-    # gender encoded column
-
    for col in category_lst:
       lst = []
       groups = df.groupby(col).mean()['Churn']
