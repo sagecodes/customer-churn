@@ -23,8 +23,8 @@ category_lst = ['Gender',
                 'Income_Category',
                 'Card_Category']
 
-encoder_helper(data_df, category_lst)
-
+encoded_df = encoder_helper(data_df, category_lst)
+print(encoded_df)
 
 # %% perform_feature_engineering
 

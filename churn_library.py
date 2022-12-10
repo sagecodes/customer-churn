@@ -131,7 +131,7 @@ def encoder_helper(df, category_lst, response=None):
          lst.append(groups.loc[val])
 
       df[col] = lst
-      print(df)
+      return df
    
 
 
