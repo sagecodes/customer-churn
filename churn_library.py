@@ -110,7 +110,7 @@ def perform_eda(df):
    print('saved correlation graph at: images/correlation.png')
 
 
-def encoder_helper(df, category_lst, response=None):
+def encoder_helper(df, category_lst, target):
    '''
     helper function to turn each categorical column into a new column with
     propotion of churn for each category - associated with cell 15 from the notebook
@@ -118,19 +118,19 @@ def encoder_helper(df, category_lst, response=None):
     input:
             df: pandas dataframe
             category_lst: list of columns that contain categorical features
-            response: string of response name [optional argument that could be used for naming variables or index y column]
+            target: string of response name [optional argument that could be used for naming variables or index y column]
 
     output:
             df: pandas dataframe with new columns for each category in list
    '''
    for col in category_lst:
       lst = []
-      groups = df.groupby(col).mean()['Churn']
+      groups = df.groupby(col).mean()[target]
 
       for val in df[col]:
          lst.append(groups.loc[val])
 
-      df[col+'_'+'Churn'] = lst
+      df[col+'_'+target] = lst
    return df
    
 
