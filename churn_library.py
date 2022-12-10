@@ -8,6 +8,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns; sns.set()
 
+from sklearn.model_selection import train_test_split
+
+
 
 os.environ['QT_QPA_PLATFORM']='offscreen'
 
@@ -135,11 +138,11 @@ def encoder_helper(df, category_lst, target):
    
 
 
-def perform_feature_engineering(df, response):
+def perform_feature_engineering(df, keep_cols, target):
     '''
     input:
               df: pandas dataframe
-              response: string of response name [optional argument that could be used for naming variables or index y column]
+              target: string of response name [optional argument that could be used for naming variables or index y column]
 
     output:
               X_train: X training data
@@ -147,7 +150,15 @@ def perform_feature_engineering(df, response):
               y_train: y training data
               y_test: y testing data
     '''
+    X = df[keep_cols]
+    y = df[target]
 
+    X_train, X_test, y_train, y_test = train_test_split(
+                                                      X, y,
+                                                      test_size= 0.3,
+                                                      random_state=42)
+
+    return (X_train, X_test, y_train, y_test)
 
 
 
