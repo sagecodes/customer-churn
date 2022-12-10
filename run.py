@@ -2,7 +2,7 @@
 File for running churn_library functions
 '''
 # %%
-from churn_library import import_data, perform_eda
+from churn_library import (import_data, perform_eda, encoder_helper)
 
 
 # %% Import data
@@ -17,6 +17,13 @@ perform_eda(data_df)
 
 # %% encoder_helper
 
+category_lst = ['Gender',
+                'Education_Level',
+                'Marital_Status',
+                'Income_Category',
+                'Card_Category']
+
+encoder_helper(data_df, category_lst)
 
 
 # %% perform_feature_engineering

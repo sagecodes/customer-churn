@@ -110,7 +110,7 @@ def perform_eda(df):
    print('saved correlation graph at: images/correlation.png')
 
 
-def encoder_helper(df, category_lst, response):
+def encoder_helper(df, category_lst, response=None):
    '''
     helper function to turn each categorical column into a new column with
     propotion of churn for each category - associated with cell 15 from the notebook
@@ -124,6 +124,7 @@ def encoder_helper(df, category_lst, response):
             df: pandas dataframe with new columns for
    '''
     # gender encoded column
+
    for col in category_lst:
       lst = []
       groups = df.groupby(col).mean()['Churn']
@@ -131,7 +132,8 @@ def encoder_helper(df, category_lst, response):
       for val in df[col]:
          lst.append(groups.loc[val])
 
-      df[col] = lst    
+      df[col] = lst
+      print(df)
    
 
 
