@@ -138,7 +138,7 @@ def encoder_helper(df, category_lst, target):
    
 
 
-def perform_feature_engineering(df, keep_cols, target):
+def perform_feature_engineering(df, keep_cols, target, test_size=0.2, seed=42):
     '''
     input:
               df: pandas dataframe
@@ -155,8 +155,8 @@ def perform_feature_engineering(df, keep_cols, target):
 
     X_train, X_test, y_train, y_test = train_test_split(
                                                       X, y,
-                                                      test_size= 0.3,
-                                                      random_state=42)
+                                                      test_size=test_size,
+                                                      random_state=seed)
 
     return (X_train, X_test, y_train, y_test)
 
