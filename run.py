@@ -5,8 +5,19 @@ File for running churn_library functions
 from churn_library import (import_data,
                             perform_eda,
                             encoder_helper,
-                            perform_feature_engineering)
+                            perform_feature_engineering,
+                            classification_report_image)
 
+
+# Temp imports
+from sklearn.preprocessing import normalize
+from sklearn.model_selection import train_test_split
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
+
+from sklearn.metrics import plot_roc_curve, classification_report
 
 # %% Import data
 data_df = import_data('./data/bank_data.csv')
@@ -41,17 +52,52 @@ keep_cols = ['Customer_Age', 'Dependent_count', 'Months_on_book',
              'Gender_Churn', 'Education_Level_Churn', 'Marital_Status_Churn', 
              'Income_Category_Churn', 'Card_Category_Churn']
 
-
-train_data = perform_feature_engineering(encoded_df, keep_cols, target)
-
-#%%
-train_data[2]
-
-
+print('Running perform_feature_engineering function:')
+X_train, X_test, y_train, y_test = perform_feature_engineering(encoded_df, keep_cols, target)
 
 #%%
+# X = train_data
+# y = data_df[target]
+# y_train
 
-classification_report_image()
+#%%
+# %% Temp training
+# This cell may take up to 15-20 minutes to run
+# train test split 
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size= 0.3, random_state=42)
+
+# grid search
+rfc = RandomForestClassifier(random_state=42)
+# Use a different solver if the default 'lbfgs' fails to converge
+# Reference: https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+lrc = LogisticRegression(solver='lbfgs', max_iter=3000)
+
+param_grid = { 
+    'n_estimators': [200, 500],
+    'max_features': ['auto', 'sqrt'],
+    'max_depth' : [4,5,100],
+    'criterion' :['gini', 'entropy']
+}
+
+cv_rfc = GridSearchCV(estimator=rfc, param_grid=param_grid, cv=5)
+cv_rfc.fit(X_train, y_train)
+
+lrc.fit(X_train, y_train)
+
+y_train_preds_rf = cv_rfc.best_estimator_.predict(X_train)
+y_test_preds_rf = cv_rfc.best_estimator_.predict(X_test)
+
+y_train_preds_lr = lrc.predict(X_train)
+y_test_preds_lr = lrc.predict(X_test)
+
+#%%
+
+classification_report_image(y_train,
+                                y_test,
+                                y_train_preds_lr,
+                                y_train_preds_rf,
+                                y_test_preds_lr,
+                                y_test_preds_rf)
 
 # %% feature_importance_plot
 
