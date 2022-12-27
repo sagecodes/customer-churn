@@ -19,6 +19,9 @@ from sklearn.model_selection import GridSearchCV
 
 from sklearn.metrics import plot_roc_curve, classification_report
 
+import pickle
+import joblib 
+
 # %% Import data
 data_df = import_data('./data/bank_data.csv')
 print(data_df)
@@ -79,10 +82,16 @@ param_grid = {
     'criterion' :['gini', 'entropy']
 }
 
-cv_rfc = GridSearchCV(estimator=rfc, param_grid=param_grid, cv=5)
-cv_rfc.fit(X_train, y_train)
+# cv_rfc = GridSearchCV(estimator=rfc, param_grid=param_grid, cv=5)
+# cv_rfc.fit(X_train, y_train)
 
-lrc.fit(X_train, y_train)
+# lrc.fit(X_train, y_train)
+
+cv_rfc = joblib.load('models\rfc_model.pkl')
+
+
+# cv_rfc = pickle.load(open('models\rfc_model.pkl', 'rb'))
+lrc = pickle.load(open('models\logistic_model.pkl', 'rb'))
 
 y_train_preds_rf = cv_rfc.best_estimator_.predict(X_train)
 y_test_preds_rf = cv_rfc.best_estimator_.predict(X_test)
