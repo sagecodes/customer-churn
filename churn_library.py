@@ -10,6 +10,7 @@ import seaborn as sns; sns.set()
 
 from sklearn.model_selection import train_test_split
 
+from sklearn.metrics import plot_roc_curve, classification_report
 
 
 os.environ['QT_QPA_PLATFORM']='offscreen'
