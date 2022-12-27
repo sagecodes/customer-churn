@@ -47,10 +47,11 @@ train_data = perform_feature_engineering(encoded_df, keep_cols, target)
 #%%
 train_data[2]
 
-# %% classification_report_image
 
 
+#%%
 
+classification_report_image()
 
 # %% feature_importance_plot
 

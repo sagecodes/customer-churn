@@ -162,27 +162,41 @@ def perform_feature_engineering(df, keep_cols, target, test_size=0.2, seed=42):
 
 
 
-# def classification_report_image(y_train,
-#                                 y_test,
-#                                 y_train_preds_lr,
-#                                 y_train_preds_rf,
-#                                 y_test_preds_lr,
-#                                 y_test_preds_rf):
-#     '''
-#     produces classification report for training and testing results and stores report as image
-#     in images folder
-#     input:
-#             y_train: training response values
-#             y_test:  test response values
-#             y_train_preds_lr: training predictions from logistic regression
-#             y_train_preds_rf: training predictions from random forest
-#             y_test_preds_lr: test predictions from logistic regression
-#             y_test_preds_rf: test predictions from random forest
+def classification_report_image(y_train,
+                                y_test,
+                                y_train_preds_lr,
+                                y_train_preds_rf,
+                                y_test_preds_lr,
+                                y_test_preds_rf):
+   '''
+    produces classification report for training and testing results and stores
+     report as image in images folder
+    input:
+            y_train: training response values
+            y_test:  test response values
+            y_train_preds_lr: training predictions from logistic regression
+            y_train_preds_rf: training predictions from random forest
+            y_test_preds_lr: test predictions from logistic regression
+            y_test_preds_rf: test predictions from random forest
 
-#     output:
-#              None
-#     '''
-#     pass
+    output:
+             None
+   '''
+
+   # Logistic regresison scores
+   print('logistic regression results')
+   print('test results')
+   print(classification_report(y_test, y_test_preds_lr))
+   print('train results')
+   print(classification_report(y_train, y_train_preds_lr))
+
+   # Random Forest scores
+   print('random forest results')
+   print('test results')
+   print(classification_report(y_test, y_test_preds_rf))
+   print('train results')
+   print(classification_report(y_train, y_train_preds_rf))
+
 
 
 # def feature_importance_plot(model, X_data, output_pth):
@@ -197,6 +211,8 @@ def perform_feature_engineering(df, keep_cols, target, test_size=0.2, seed=42):
 #              None
 #     '''
 #     pass
+
+
 
 # def train_models(X_train, X_test, y_train, y_test):
 #     '''
