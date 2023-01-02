@@ -201,14 +201,14 @@ def classification_report_image(y_train,
    #create figure to save
       # fig = plt.figure(figsize=(20,10)) 
 
-   fig = plt.rc('figure', figsize=(5, 5))
-   plt.text(0.01, 1.25, str('Random Forest Train'), {'fontsize': 10}, fontproperties = 'monospace')
+   plt.rc('figure', figsize=(6, 6))
+   plt.text(0.01, 1.0, str('Random Forest Train'), {'fontsize': 10}, fontproperties = 'monospace')
+   plt.text(0.01, 0.6, str(classification_report(y_train, y_train_preds_rf)), {'fontsize': 10}, fontproperties = 'monospace') # approach improved by OP -> monospace!
+   plt.text(0.01, 0.5, str('Random Forest Test'), {'fontsize': 10}, fontproperties = 'monospace')
    plt.text(0.01, 0.05, str(classification_report(y_test, y_test_preds_rf)), {'fontsize': 10}, fontproperties = 'monospace') # approach improved by OP -> monospace!
-   plt.text(0.01, 0.6, str('Random Forest Test'), {'fontsize': 10}, fontproperties = 'monospace')
-   plt.text(0.01, 0.7, str(classification_report(y_train, y_train_preds_rf)), {'fontsize': 10}, fontproperties = 'monospace') # approach improved by OP -> monospace!
-   plt.axis('off');
+   plt.axis('off')
    plt.savefig('images/random_forest_classification_report.png')
-   plt.close(fig)
+   plt.close()
 
 
 
