@@ -198,6 +198,20 @@ def classification_report_image(y_train,
    print('train results')
    print(classification_report(y_train, y_train_preds_rf))
 
+   #create figure to save
+      # fig = plt.figure(figsize=(20,10)) 
+
+   fig = plt.rc('figure', figsize=(5, 5))
+   plt.text(0.01, 1.25, str('Random Forest Train'), {'fontsize': 10}, fontproperties = 'monospace')
+   plt.text(0.01, 0.05, str(classification_report(y_test, y_test_preds_rf)), {'fontsize': 10}, fontproperties = 'monospace') # approach improved by OP -> monospace!
+   plt.text(0.01, 0.6, str('Random Forest Test'), {'fontsize': 10}, fontproperties = 'monospace')
+   plt.text(0.01, 0.7, str(classification_report(y_train, y_train_preds_rf)), {'fontsize': 10}, fontproperties = 'monospace') # approach improved by OP -> monospace!
+   plt.axis('off');
+   plt.savefig('images/random_forest_classification_report.png')
+   plt.close(fig)
+
+
+
 
 
 # def feature_importance_plot(model, X_data, output_pth):
