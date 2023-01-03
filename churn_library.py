@@ -7,6 +7,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns; sns.set()
+import numpy as np
 
 from sklearn.model_selection import train_test_split
 
@@ -218,23 +219,39 @@ def classification_report_image(y_train,
    plt.axis('off')
    plt.savefig('images/logistic_regression_classification_report.png')
    plt.close()
+   
 
+def feature_importance_plot(model, X_data, output_pth):
+   '''
+    creates and stores the feature importances in output_pth
+    input:
+            model: model object containing feature_importances_
+            X_data: pandas dataframe of X values
+            output_pth: path to store the figure
 
+    output:
+             None
+   '''
+   importances = model.feature_importances_
+   indices = np.argsort(importances)[::-1]
+   names = [X_data.columns[i] for i in indices]
 
+   # Create plot
+   plt.figure(figsize=(20,10))
 
-# def feature_importance_plot(model, X_data, output_pth):
-#     '''
-#     creates and stores the feature importances in pth
-#     input:
-#             model: model object containing feature_importances_
-#             X_data: pandas dataframe of X values
-#             output_pth: path to store the figure
+   # Create plot title
+   plt.title("Feature Importance")
+   plt.ylabel('Importance')
 
-#     output:
-#              None
-#     '''
-#     pass
+   # Add bars
+   plt.bar(range(X_data.shape[1]), importances[indices])
 
+   # Add feature names as x-axis labels
+   plt.xticks(range(X_data.shape[1]), names, rotation=90)
+   plt.savefig(output_pth)
+   plt.close()
+
+   print(f'feature importance plot saved to {output_pth}')
 
 
 # def train_models(X_train, X_test, y_train, y_test):
