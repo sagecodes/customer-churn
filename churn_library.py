@@ -1,15 +1,12 @@
 # library doc string
 
-
 # import libraries
 import os
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns; sns.set()
 import numpy as np
 import joblib 
-
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
