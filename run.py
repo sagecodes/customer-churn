@@ -7,7 +7,8 @@ from churn_library import (import_data,
                             encoder_helper,
                             perform_feature_engineering,
                             classification_report_image,
-                            feature_importance_plot)
+                            feature_importance_plot,
+                            train_models)
 
 
 # Temp imports
@@ -115,3 +116,5 @@ feature_importance_plot(cv_rfc, X_test,'images/random_forest_feature_importance.
 # feature_importance_plot(lrc, X_test,'images/logistic_regression_feature_importance.png')
 
 # %% train_models
+
+train_models(X_train, X_test, y_train, y_test)
