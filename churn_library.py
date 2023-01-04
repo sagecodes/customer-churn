@@ -1,6 +1,9 @@
-# library doc string
+# '''
+# This library contains functions for the churn project
+# '''
 
 # import libraries
+###########################################################
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -51,34 +54,7 @@ def perform_eda(df):
    print('\nDescribe')
    print(df.describe())
 
-
-#    cat_columns = [
-#        'Gender',
-#        'Education_Level',
-#        'Marital_Status',
-#        'Income_Category',
-#        'Card_Category'                
-#    ]
-
-#    quant_columns = [
-#        'Customer_Age',
-#        'Dependent_count', 
-#        'Months_on_book',
-#        'Total_Relationship_Count', 
-#        'Months_Inactive_12_mon',
-#        'Contacts_Count_12_mon', 
-#        'Credit_Limit', 
-#        'Total_Revolving_Bal',
-#        'Avg_Open_To_Buy', 
-#        'Total_Amt_Chng_Q4_Q1', 
-#        'Total_Trans_Amt',
-#        'Total_Trans_Ct', 
-#        'Total_Ct_Chng_Q4_Q1', 
-#        'Avg_Utilization_Ratio'
-#    ]
-
-   # Save graph: Attrition_Flag for Existing Customer
-
+   # save graph: Attrition_Flag
    df['Churn'] = df['Attrition_Flag'].apply(lambda val: 0 if val == "Existing Customer" else 1)
    fig = plt.figure(figsize=(20,10)) 
    df['Churn'].hist();
@@ -99,8 +75,6 @@ def perform_eda(df):
 
 
    plt.figure(figsize=(20,10)) 
-   # distplot is deprecated. Use histplot instead
-   # sns.distplot(df['Total_Trans_Ct']);
    # Show distributions of 'Total_Trans_Ct' and add a smooth curve obtained using a kernel density estimate
    histplot = sns.histplot(df['Total_Trans_Ct'], stat='density', kde=True);
    fig = histplot.get_figure()
