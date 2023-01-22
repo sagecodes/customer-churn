@@ -1,5 +1,7 @@
 '''
 File for running churn_library functions
+
+pip install ipykernel
 '''
 # %%
 from churn_library import (import_data,

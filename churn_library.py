@@ -5,17 +5,18 @@
 # import libraries
 ###########################################################
 import os
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns; sns.set()
-import numpy as np
-import joblib 
 
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
+import joblib
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import plot_roc_curve, classification_report
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report, plot_roc_curve
+from sklearn.model_selection import GridSearchCV, train_test_split
+
+import seaborn as sns; sns.set()
+
 
 
 os.environ['QT_QPA_PLATFORM']='offscreen'
