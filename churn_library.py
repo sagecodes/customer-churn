@@ -22,7 +22,8 @@ sns.set()
 
 os.environ["QT_QPA_PLATFORM"] = "offscreen"
 
-
+# Data: import & EDA
+###########################################################
 def import_data(pth):
     """
     returns dataframe for the csv found at pth
@@ -76,7 +77,8 @@ def perform_eda(df):
     df.Marital_Status.value_counts("normalize").plot(kind="bar")
 
     plt.figure(figsize=(20, 10))
-    # Show distributions of 'Total_Trans_Ct' and add a smooth curve obtained using a kernel density estimate
+    # Show distributions of 'Total_Trans_Ct' and add a smooth curve obtained
+    # using a kernel density estimate
     histplot = sns.histplot(df["Total_Trans_Ct"], stat="density", kde=True)
     fig = histplot.get_figure()
     fig.savefig("images/Total_Trans_Ct.png")
@@ -84,21 +86,28 @@ def perform_eda(df):
 
     # pairwise correlation
     plt.figure(figsize=(20, 10))
-    corr_plot = sns.heatmap(df.corr(), annot=False, cmap="Dark2_r", linewidths=2)
+    corr_plot = sns.heatmap(
+        df.corr(),
+        annot=False,
+        cmap="Dark2_r",
+        linewidths=2)
     fig = corr_plot.get_figure()
     fig.savefig("images/correlation.png")
     print("saved correlation graph at: images/correlation.png")
 
-
+# data: preprocessing & feature engineering
+###########################################################
 def encoder_helper(df, category_lst, target):
     """
     helper function to turn each categorical column into a new column with
-    propotion of churn for each category - associated with cell 15 from the notebook
+      propotion of churn for each category - associated with cell 15 from 
+      the notebook
 
     input:
             df: pandas dataframe
             category_lst: list of columns that contain categorical features
-            target: string of response name [optional argument that could be used for naming variables or index y column]
+            target: string of response name [optional argument that could be
+               used for naming variables or index y column]
 
     output:
             df: pandas dataframe with new columns for each category in list
@@ -117,8 +126,9 @@ def encoder_helper(df, category_lst, target):
 def perform_feature_engineering(df, keep_cols, target, test_size=0.2, seed=42):
     """
     input:
-              df: pandas dataframe
-              target: string of response name [optional argument that could be used for naming variables or index y column]
+            df: pandas dataframe
+            target: string of response name [optional argument that could be
+               used for naming variables or index y column]
 
     output:
               X_train: X training data
@@ -135,7 +145,8 @@ def perform_feature_engineering(df, keep_cols, target, test_size=0.2, seed=42):
 
     return (X_train, X_test, y_train, y_test)
 
-
+# Models: Evaluation & Training
+###########################################################
 def classification_report_image(
     y_train,
     y_test,
@@ -290,7 +301,7 @@ def train_models(X_train, X_test, y_train, y_test):
     # grid search
     rfc = RandomForestClassifier(random_state=42)
     # Use a different solver if the default 'lbfgs' fails to converge
-    # Reference: https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  
     lrc = LogisticRegression(solver="lbfgs", max_iter=3000)
 
     param_grid = {
