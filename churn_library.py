@@ -298,6 +298,7 @@ def train_models(X_train, X_test, y_train, y_test):
     output:
               None
     """
+    print("This may take a while...")
     # grid search
     rfc = RandomForestClassifier(random_state=42)
     # Use a different solver if the default 'lbfgs' fails to converge
