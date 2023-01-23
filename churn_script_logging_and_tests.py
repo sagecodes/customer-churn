@@ -2,7 +2,9 @@ import os
 import logging
 import churn_library as cls
 
-from churn_library import (import_data,)
+from churn_library import (import_data,
+							perform_eda,
+							)
 
 logging.basicConfig(
     filename='./logs/churn_library.log',
@@ -29,11 +31,20 @@ def test_import(import_data):
 		raise err
 
 
-def test_eda(perform_eda):
+def test_eda(perform_eda, df):
 	'''
 	test perform eda function
 	'''
-
+	try:
+		perform_eda(df)
+		assert os.path.exists("./images/Attrition_Flag_Existing_Customer.png")
+		assert os.path.exists("./images/Customer_Age.png")
+		assert os.path.exists("./images/Total_Trans_Ct.png")
+		assert os.path.exists("./images/correlation.png")
+		logging.info("Testing perform_eda - All images saved: SUCCESS")
+	except AssertionError as err:
+		logging.error("Testing perform_eda - Images saved: file(s) not found")
+		raise err
 
 
 def test_encoder_helper(encoder_helper):
@@ -56,6 +67,9 @@ def test_train_models(train_models):
 
 if __name__ == "__main__":
 	test_import(import_data)
+
+	df = import_data("./data/bank_data.csv")
+	test_eda(perform_eda, df)
 
 
 

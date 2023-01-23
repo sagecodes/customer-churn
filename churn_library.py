@@ -47,7 +47,6 @@ def perform_eda(df):
     output:
          None
     """
-
     print("--- EDA ---")
     print("Shape:")
     print(df.shape)
