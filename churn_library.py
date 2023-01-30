@@ -35,6 +35,10 @@ def import_data(pth):
     """
     df = pd.read_csv(pth)
 
+    df["Churn"] = df["Attrition_Flag"].apply(
+        lambda val: 0 if val == "Existing Customer" else 1
+    )
+
     return df
 
 
@@ -56,9 +60,9 @@ def perform_eda(df):
     print(df.describe())
 
     # save graph: Attrition_Flag
-    df["Churn"] = df["Attrition_Flag"].apply(
-        lambda val: 0 if val == "Existing Customer" else 1
-    )
+    # df["Churn"] = df["Attrition_Flag"].apply(
+    #     lambda val: 0 if val == "Existing Customer" else 1
+    # )
     fig = plt.figure(figsize=(20, 10))
     df["Churn"].hist()
     plt.savefig("images/Attrition_Flag_Existing_Customer.png")
