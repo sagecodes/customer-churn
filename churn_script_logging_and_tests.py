@@ -32,7 +32,7 @@ def test_import():
 		raise err
 
 
-def test_eda(perform_eda, df):
+def test_eda():
 	'''
 	test perform eda function
 	'''
@@ -70,7 +70,7 @@ def test_train_models(train_models):
 if __name__ == "__main__":
 	test_import()
 	# df = import_data("./data/bank_data.csv")
-	# test_eda(perform_eda, df)
+	test_eda()
 
 
 
