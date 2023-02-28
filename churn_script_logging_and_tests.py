@@ -10,9 +10,10 @@ logging.basicConfig(
     filename='./logs/churn_library.log',
     level = logging.INFO,
     filemode='w',
-    format='%(name)s - %(levelname)s - %(message)s')
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', 
+	datefmt='%Y-%m-%d %H:%M:%S')
 
-def test_import(import_data):
+def test_import():
 	'''
 	test data import - this example is completed for you to assist with the other test functions
 	'''
