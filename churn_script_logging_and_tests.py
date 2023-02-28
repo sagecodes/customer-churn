@@ -35,6 +35,7 @@ def test_eda(perform_eda, df):
 	'''
 	test perform eda function
 	'''
+	df = import_data("./data/bank_data.csv")
 	try:
 		perform_eda(df)
 		assert os.path.exists("./images/Attrition_Flag_Existing_Customer.png")
@@ -66,10 +67,9 @@ def test_train_models(train_models):
 
 
 if __name__ == "__main__":
-	test_import(import_data)
-
-	df = import_data("./data/bank_data.csv")
-	test_eda(perform_eda, df)
+	test_import()
+	# df = import_data("./data/bank_data.csv")
+	# test_eda(perform_eda, df)
 
 
 
