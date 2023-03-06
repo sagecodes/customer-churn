@@ -4,6 +4,7 @@ import churn_library as cls
 
 from churn_library import (import_data,
 							perform_eda,
+							encoder_helper,
 							)
 
 logging.basicConfig(
@@ -53,7 +54,26 @@ def test_encoder_helper(encoder_helper):
 	'''
 	test encoder helper
 	'''
+	df = import_data("./data/bank_data.csv")
 
+	category_lst = ['Gender',
+                'Education_Level',
+                'Marital_Status',
+                'Income_Category',
+                'Card_Category']
+	target = 'Churn'
+
+	encoded_df = encoder_helper(df, category_lst, target)
+
+	for col in category_lst:
+		try:
+			assert col + "_" + target in encoded_df.columns
+			logging.info("Testing encoder_helper: SUCCESS")
+		except AssertionError as err:
+			logging.error("Testing encoder_helper: missing column")
+			raise err
+		
+	
 
 def test_perform_feature_engineering(perform_feature_engineering):
 	'''
@@ -71,6 +91,7 @@ if __name__ == "__main__":
 	test_import()
 	# df = import_data("./data/bank_data.csv")
 	test_eda()
+	test_encoder_helper(encoder_helper)
 
 
 
