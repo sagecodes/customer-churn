@@ -1,13 +1,8 @@
-import os
 import logging
-import churn_library as cls
+import os
 
-from churn_library import (import_data,
-							perform_eda,
-							encoder_helper,
-							perform_feature_engineering,
-							train_models
-							)
+from churn_library import (encoder_helper, import_data, perform_eda,
+                           perform_feature_engineering, train_models)
 
 logging.basicConfig(
     filename='./logs/churn_library.log',
@@ -162,7 +157,7 @@ if __name__ == "__main__":
 	test_eda()
 	test_encoder_helper(encoder_helper)
 	test_perform_feature_engineering(perform_feature_engineering)
-	# test_train_models(train_models)
+	test_train_models(train_models)
 
 
 
