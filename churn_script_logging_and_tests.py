@@ -76,18 +76,45 @@ def test_encoder_helper(encoder_helper):
 			raise err
 		
 
-
 def test_perform_feature_engineering(perform_feature_engineering):
 	'''
 	test perform_feature_engineering
 	'''
-	# df = import_data("./data/bank_data.csv")
+	df = import_data("./data/bank_data.csv")
+
+	category_lst = ['Gender',
+                'Education_Level',
+                'Marital_Status',
+                'Income_Category',
+                'Card_Category']
+	
+	keep_cols = ['Customer_Age', 'Dependent_count', 'Months_on_book',
+             'Total_Relationship_Count', 'Months_Inactive_12_mon',
+             'Contacts_Count_12_mon', 'Credit_Limit', 'Total_Revolving_Bal',
+             'Avg_Open_To_Buy', 'Total_Amt_Chng_Q4_Q1', 'Total_Trans_Amt',
+             'Total_Trans_Ct', 'Total_Ct_Chng_Q4_Q1', 'Avg_Utilization_Ratio',
+             'Gender_Churn', 'Education_Level_Churn', 'Marital_Status_Churn', 
+             'Income_Category_Churn', 'Card_Category_Churn']
+	
+	target = 'Churn'
+
+	encoded_df = encoder_helper(df, category_lst, target)
 
 	# train_test_values = perform_feature_engineering(df)
+	train_X, test_X, train_y, test_y = perform_feature_engineering(encoded_df, keep_cols, target)
 
-	# #loop through the train_test_values from keep list
-
-
+	try:
+		assert train_X.shape[0] > 0
+		assert train_X.shape[1] > 0
+		assert test_X.shape[0] > 0
+		assert test_X.shape[1] > 0
+		assert train_y.shape[0] > 0
+		assert test_y.shape[0] > 0
+		logging.info("Testing perform_feature_engineering: SUCCESS")
+	except AssertionError as err:
+		logging.error("Testing perform_feature_engineering: missing column(s) in train or test data")
+		raise err
+	
 
 def test_train_models(train_models):
 	'''
@@ -131,11 +158,10 @@ def test_train_models(train_models):
 
 if __name__ == "__main__":
 	test_import()
-	# df = import_data("./data/bank_data.csv")
 	test_eda()
 	test_encoder_helper(encoder_helper)
-	# test_perform_feature_engineering(perform_feature_engineering)
-	test_train_models(train_models)
+	test_perform_feature_engineering(perform_feature_engineering)
+	# test_train_models(train_models)
 
 
 
