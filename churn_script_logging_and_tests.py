@@ -70,10 +70,11 @@ def test_encoder_helper(encoder_helper):
 	for col in category_lst:
 		try:
 			assert col + "_" + target in encoded_df.columns
-			logging.info("Testing encoder_helper: SUCCESS")
+			# logging.info("Testing encoder_helper: SUCCESS")
 		except AssertionError as err:
-			logging.error("Testing encoder_helper: missing column")
+			logging.error("Testing encoder_helper: missing column(s)")
 			raise err
+	logging.info("Testing encoder_helper: SUCCESS")
 		
 
 def test_perform_feature_engineering(perform_feature_engineering):
