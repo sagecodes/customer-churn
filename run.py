@@ -4,19 +4,18 @@ File for running churn_library functions
 Can be run in VS Code with the Python Interactive window "# %%"
 
 or in the terminal with the command: python run.py
+
+author: @sagecodes
+date: 03/13/2023
+
 '''
 # %% Import libraries and churn library functions
 from churn_library import (import_data,
                             perform_eda,
                             encoder_helper,
                             perform_feature_engineering,
-                            classification_report_image,
                             feature_importance_plot,
                             train_models)
-
-
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
 
 import joblib 
 
@@ -51,14 +50,12 @@ keep_cols = ['Customer_Age', 'Dependent_count', 'Months_on_book',
 print('Running perform_feature_engineering function:')
 X_train, X_test, y_train, y_test = perform_feature_engineering(encoded_df, keep_cols, target)
 
+
 # %% train_models
 train_models(X_train, X_test, y_train, y_test)
 
 
-# %% feature_importance_plot
-# feature imoprtance for random forest
+# %% feature imoprtance for random forest
 cv_rfc = joblib.load('models\\rfc_model_train.pkl')
 feature_importance_plot(cv_rfc, X_test,'images/random_forest_feature_importance.png')
 
-
-# %%
