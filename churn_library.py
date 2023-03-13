@@ -329,20 +329,30 @@ def train_models(X_train, X_test, y_train, y_test):
     y_train_preds_lr = lrc.predict(X_train)
     y_test_preds_lr = lrc.predict(X_test)
 
-    # scores
-    print("random forest results")
-    print("test results")
-    print(classification_report(y_test, y_test_preds_rf))
-    print("train results")
-    print(classification_report(y_train, y_train_preds_rf))
+    # # scores
+    # print("random forest results")
+    # print("test results")
+    # print(classification_report(y_test, y_test_preds_rf))
+    # print("train results")
+    # print(classification_report(y_train, y_train_preds_rf))
 
-    print("logistic regression results")
-    print("test results")
-    print(classification_report(y_test, y_test_preds_lr))
-    print("train results")
-    print(classification_report(y_train, y_train_preds_lr))
+    # print("logistic regression results")
+    # print("test results")
+    # print(classification_report(y_test, y_test_preds_lr))
+    # print("train results")
+    # print(classification_report(y_train, y_train_preds_lr))
 
     # save best model
     joblib.dump(cv_rfc.best_estimator_, "./models/rfc_model_train.pkl")
     joblib.dump(lrc, "./models/logistic_model_train.pkl")
     print("models saved!")
+
+    # save & print classification reports
+    classification_report_image(
+    y_train,
+    y_test,
+    y_train_preds_lr,
+    y_train_preds_rf,
+    y_test_preds_lr,
+    y_test_preds_rf,
+)
