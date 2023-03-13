@@ -1,5 +1,8 @@
 '''
 This library contains functions for the churn project
+
+author: @sagecodes
+date: 03/12/2023
 '''
 
 # import libraries

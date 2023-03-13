@@ -54,26 +54,11 @@ X_train, X_test, y_train, y_test = perform_feature_engineering(encoded_df, keep_
 # %% train_models
 train_models(X_train, X_test, y_train, y_test)
 
-cv_rfc = joblib.load('models\\rfc_model_train.pkl')
-lrc = joblib.load('models\logistic_model_train.pkl')
-
-y_train_preds_rf = cv_rfc.predict(X_train)
-y_test_preds_rf = cv_rfc.predict(X_test)
-
-y_train_preds_lr = lrc.predict(X_train)
-y_test_preds_lr = lrc.predict(X_test)
-
-#%%
-
-classification_report_image(y_train,
-                            y_test,
-                            y_train_preds_lr,
-                            y_train_preds_rf,
-                            y_test_preds_lr,
-                            y_test_preds_rf)
 
 # %% feature_importance_plot
 # feature imoprtance for random forest
+cv_rfc = joblib.load('models\\rfc_model_train.pkl')
 feature_importance_plot(cv_rfc, X_test,'images/random_forest_feature_importance.png')
-# feature_importance_plot(lrc, X_test,'images/logistic_regression_feature_importance.png')
 
+
+# %%
