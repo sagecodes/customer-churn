@@ -9,7 +9,7 @@ This project is part of the Udacity Machine Learning Engineer Nanodegree. The go
 
 * Customer account information – how long they’ve been a customer, contract, payment method, paperless billing, monthly charges, and total charges
 
-Find more information about the original datset on Kaggle: [Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
+Find more information about the original data set on Kaggle: [Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
 
 
 ## Files and data description
@@ -28,6 +28,8 @@ Overview of the files and data present in the root directory.
 │   ├── logisitic_regression_classification_report.png
 │   ├── random_forest_classification_report.png
 │   ├── Total_Trans.Ct.png
+
+```
 
 ## Running Files
 
