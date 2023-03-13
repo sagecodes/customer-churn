@@ -1,6 +1,6 @@
-# '''
-# This library contains functions for the churn project
-# '''
+'''
+This library contains functions for the churn project
+'''
 
 # import libraries
 ###########################################################
