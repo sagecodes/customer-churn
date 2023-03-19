@@ -89,7 +89,11 @@ def perform_eda(df):
 
     # pairwise correlation
     plt.figure(figsize=(20, 10))
-    corr_plot = sns.heatmap(df.corr(), annot=False, cmap="Dark2_r", linewidths=2)
+    corr_plot = sns.heatmap(
+        df.corr(),
+        annot=False,
+        cmap="Dark2_r",
+        linewidths=2)
     fig = corr_plot.get_figure()
     fig.savefig("images/correlation.png")
     print("saved correlation graph at: images/correlation.png")
