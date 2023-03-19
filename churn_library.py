@@ -63,9 +63,6 @@ def perform_eda(df):
     print(df.describe())
 
     # save graph: Attrition_Flag
-    # df["Churn"] = df["Attrition_Flag"].apply(
-    #     lambda val: 0 if val == "Existing Customer" else 1
-    # )
     fig = plt.figure(figsize=(20, 10))
     df["Churn"].hist()
     plt.savefig("images/Attrition_Flag_Existing_Customer.png")
@@ -304,7 +301,7 @@ def train_models(X_train, X_test, y_train, y_test):
     output:
               None
     """
-    print("This may take a while...")
+    print("Training... This may take a while...")
     # grid search
     rfc = RandomForestClassifier(random_state=42)
     # Use a different solver if the default 'lbfgs' fails to converge
@@ -328,19 +325,6 @@ def train_models(X_train, X_test, y_train, y_test):
 
     y_train_preds_lr = lrc.predict(X_train)
     y_test_preds_lr = lrc.predict(X_test)
-
-    # # scores
-    # print("random forest results")
-    # print("test results")
-    # print(classification_report(y_test, y_test_preds_rf))
-    # print("train results")
-    # print(classification_report(y_train, y_train_preds_rf))
-
-    # print("logistic regression results")
-    # print("test results")
-    # print(classification_report(y_test, y_test_preds_lr))
-    # print("train results")
-    # print(classification_report(y_train, y_train_preds_lr))
 
     # save best model
     joblib.dump(cv_rfc.best_estimator_, "./models/rfc_model_train.pkl")

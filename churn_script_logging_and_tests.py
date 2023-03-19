@@ -231,7 +231,7 @@ def test_train_models(train_models):
         raise err
 
 
-
+# Run tests if script is called directly
 if __name__ == "__main__":
     test_import()
     test_eda()
@@ -239,5 +239,5 @@ if __name__ == "__main__":
     test_perform_feature_engineering(perform_feature_engineering)
     test_classification_report_image(classification_report_image)
     test_feature_importance_plot(feature_importance_plot)
-    # test_train_models(train_models)
+    test_train_models(train_models)
     print("Testing complete: see logs in /logs folder!")
