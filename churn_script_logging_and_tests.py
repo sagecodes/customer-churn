@@ -143,27 +143,45 @@ def test_perform_feature_engineering(perform_feature_engineering):
         )
         raise err
 
-# def test_classification_report_image(classification_report_image):
-#     '''
-#     test classification_report_image
-#     '''
-#     df = import_data("./data/bank_data.csv")
+def test_classification_report_image(classification_report_image):
+    '''
+    test classification_report_image
+    '''
+    df = import_data("./data/bank_data.csv")
 
-#     encoded_df = encoder_helper(df, category_lst, target)
+    encoded_df = encoder_helper(df, category_lst, target)
 
-#     # train_test_values = perform_feature_engineering(df)
-#     train_X, test_X, train_y, test_y = perform_feature_engineering(
-#         encoded_df, keep_cols, target
-#     )
+    # train_test_values = perform_feature_engineering(df)
+    X_train, X_test, y_train, y_test = perform_feature_engineering(
+        encoded_df, keep_cols, target
+    )
 
-#     classification_report_image(
-#     y_train,
-#     y_test,
-#     y_train_preds_lr,
-#     y_train_preds_rf,
-#     y_test_preds_lr,
-#     y_test_preds_rf,
-# )
+    cv_rfc = joblib.load('models\\rfc_model.pkl')
+    lrc = joblib.load('models\\logistic_model.pkl')
+
+    y_train_preds_rf = cv_rfc.predict(X_train)
+    y_test_preds_rf = cv_rfc.predict(X_test)
+
+    y_train_preds_lr = lrc.predict(X_train)
+    y_test_preds_lr = lrc.predict(X_test)
+
+    classification_report_image(
+    y_train,
+    y_test,
+    y_train_preds_lr,
+    y_train_preds_rf,
+    y_test_preds_lr,
+    y_test_preds_rf,
+)
+    
+    try:
+        assert os.path.exists("images\\logistic_regression_classification_report.png")
+        assert os.path.exists("images\\random_forest_classification_report.png")
+        logging.info("Testing classification_report_image - images saved: SUCCESS")
+    except AssertionError as err:
+        logging.error("Testing classification_report_image - image not saved")
+        raise err
+    
 
 def test_feature_importance_plot(feature_importance_plot):
     """
@@ -179,7 +197,7 @@ def test_feature_importance_plot(feature_importance_plot):
         encoded_df, keep_cols, target
     )
 
-    cv_rfc = joblib.load('models\\rfc_model_train.pkl')
+    cv_rfc = joblib.load('models\\rfc_model.pkl')
     feature_importance_plot(cv_rfc, test_X,'images/random_forest_feature_importance.png')
 
     try:
@@ -219,6 +237,7 @@ if __name__ == "__main__":
     test_eda()
     test_encoder_helper(encoder_helper)
     test_perform_feature_engineering(perform_feature_engineering)
+    test_classification_report_image(classification_report_image)
     test_feature_importance_plot(feature_importance_plot)
     # test_train_models(train_models)
     print("Testing complete: see logs in /logs folder!")
