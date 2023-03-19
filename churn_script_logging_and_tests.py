@@ -1,18 +1,11 @@
 import logging
 import os
 
-import joblib 
+import joblib
 
-
-from churn_library import (
-    encoder_helper,
-    import_data,
-    perform_eda,
-    perform_feature_engineering,
-    classification_report_image,
-    train_models,
-    feature_importance_plot
-)
+from churn_library import (classification_report_image, encoder_helper,
+                           feature_importance_plot, import_data, perform_eda,
+                           perform_feature_engineering, train_models)
 
 logging.basicConfig(
     filename="./logs/churn_library.log",

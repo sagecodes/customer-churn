@@ -9,15 +9,12 @@ author: @sagecodes
 date: 03/13/2023
 
 '''
-# %% Import libraries and churn library functions
-from churn_library import (import_data,
-                            perform_eda,
-                            encoder_helper,
-                            perform_feature_engineering,
-                            feature_importance_plot,
-                            train_models)
+import joblib
 
-import joblib 
+# %% Import libraries and churn library functions
+from churn_library import (encoder_helper, feature_importance_plot,
+                           import_data, perform_eda,
+                           perform_feature_engineering, train_models)
 
 # %% Import data
 data_df = import_data('./data/bank_data.csv')
