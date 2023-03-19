@@ -3,9 +3,15 @@ import os
 
 import joblib
 
-from churn_library import (classification_report_image, encoder_helper,
-                           feature_importance_plot, import_data, perform_eda,
-                           perform_feature_engineering, train_models)
+from churn_library import (
+    classification_report_image,
+    encoder_helper,
+    feature_importance_plot,
+    import_data,
+    perform_eda,
+    perform_feature_engineering,
+    train_models,
+)
 
 logging.basicConfig(
     filename="./logs/churn_library.log",
@@ -52,6 +58,7 @@ target = "Churn"
 
 # test functions
 ###########################################################
+
 
 def test_import():
     """
@@ -136,10 +143,11 @@ def test_perform_feature_engineering(perform_feature_engineering):
         )
         raise err
 
+
 def test_classification_report_image(classification_report_image):
-    '''
+    """
     test classification_report_image
-    '''
+    """
     df = import_data("./data/bank_data.csv")
 
     encoded_df = encoder_helper(df, category_lst, target)
@@ -149,8 +157,8 @@ def test_classification_report_image(classification_report_image):
         encoded_df, keep_cols, target
     )
 
-    cv_rfc = joblib.load('models\\rfc_model.pkl')
-    lrc = joblib.load('models\\logistic_model.pkl')
+    cv_rfc = joblib.load("models\\rfc_model.pkl")
+    lrc = joblib.load("models\\logistic_model.pkl")
 
     y_train_preds_rf = cv_rfc.predict(X_train)
     y_test_preds_rf = cv_rfc.predict(X_test)
@@ -159,14 +167,14 @@ def test_classification_report_image(classification_report_image):
     y_test_preds_lr = lrc.predict(X_test)
 
     classification_report_image(
-    y_train,
-    y_test,
-    y_train_preds_lr,
-    y_train_preds_rf,
-    y_test_preds_lr,
-    y_test_preds_rf,
-)
-    
+        y_train,
+        y_test,
+        y_train_preds_lr,
+        y_train_preds_rf,
+        y_test_preds_lr,
+        y_test_preds_rf,
+    )
+
     try:
         assert os.path.exists("images\\logistic_regression_classification_report.png")
         assert os.path.exists("images\\random_forest_classification_report.png")
@@ -174,7 +182,7 @@ def test_classification_report_image(classification_report_image):
     except AssertionError as err:
         logging.error("Testing classification_report_image - image not saved")
         raise err
-    
+
 
 def test_feature_importance_plot(feature_importance_plot):
     """
@@ -190,16 +198,20 @@ def test_feature_importance_plot(feature_importance_plot):
         encoded_df, keep_cols, target
     )
 
-    cv_rfc = joblib.load('models\\rfc_model.pkl')
-    feature_importance_plot(cv_rfc, test_X,'images/random_forest_feature_importance.png')
+    cv_rfc = joblib.load("models\\rfc_model.pkl")
+    feature_importance_plot(
+        cv_rfc, test_X, "images/random_forest_feature_importance.png"
+    )
 
     try:
         assert os.path.exists("images/random_forest_feature_importance.png")
         logging.info("Testing feature_importance_plot - image saved: SUCCESS")
     except AssertionError as err:
-        logging.error("Testing feature_importance_plot - Images saved: file(s) not found")
+        logging.error(
+            "Testing feature_importance_plot - Images saved: file(s) not found"
+        )
         raise err
-    
+
 
 def test_train_models(train_models):
     """

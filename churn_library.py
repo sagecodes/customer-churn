@@ -1,9 +1,9 @@
-'''
+"""
 This library contains functions for the churn project
 
 author: @sagecodes
 date: 03/12/2023
-'''
+"""
 
 # import libraries
 ###########################################################
@@ -23,6 +23,7 @@ sns.set()
 
 
 os.environ["QT_QPA_PLATFORM"] = "offscreen"
+
 
 # Data: import & EDA
 ###########################################################
@@ -88,21 +89,18 @@ def perform_eda(df):
 
     # pairwise correlation
     plt.figure(figsize=(20, 10))
-    corr_plot = sns.heatmap(
-        df.corr(),
-        annot=False,
-        cmap="Dark2_r",
-        linewidths=2)
+    corr_plot = sns.heatmap(df.corr(), annot=False, cmap="Dark2_r", linewidths=2)
     fig = corr_plot.get_figure()
     fig.savefig("images/correlation.png")
     print("saved correlation graph at: images/correlation.png")
+
 
 # data: preprocessing & feature engineering
 ###########################################################
 def encoder_helper(df, category_lst, target):
     """
     helper function to turn each categorical column into a new column with
-      propotion of churn for each category - associated with cell 15 from 
+      propotion of churn for each category - associated with cell 15 from
       the notebook
 
     input:
@@ -146,6 +144,7 @@ def perform_feature_engineering(df, keep_cols, target, test_size=0.2, seed=42):
     )
 
     return (X_train, X_test, y_train, y_test)
+
 
 # Models: Evaluation & Training
 ###########################################################
@@ -304,7 +303,7 @@ def train_models(X_train, X_test, y_train, y_test):
     # grid search
     rfc = RandomForestClassifier(random_state=42)
     # Use a different solver if the default 'lbfgs' fails to converge
-  
+
     lrc = LogisticRegression(solver="lbfgs", max_iter=3000)
 
     param_grid = {
@@ -332,10 +331,10 @@ def train_models(X_train, X_test, y_train, y_test):
 
     # save & print classification reports
     classification_report_image(
-    y_train,
-    y_test,
-    y_train_preds_lr,
-    y_train_preds_rf,
-    y_test_preds_lr,
-    y_test_preds_rf,
-)
+        y_train,
+        y_test,
+        y_train_preds_lr,
+        y_train_preds_rf,
+        y_test_preds_lr,
+        y_test_preds_rf,
+    )
