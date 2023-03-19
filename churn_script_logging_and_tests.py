@@ -1,6 +1,9 @@
 import logging
 import os
 
+import joblib 
+
+
 from churn_library import (
     encoder_helper,
     import_data,
@@ -8,6 +11,7 @@ from churn_library import (
     perform_feature_engineering,
     classification_report_image,
     train_models,
+    feature_importance_plot
 )
 
 logging.basicConfig(
@@ -161,6 +165,29 @@ def test_perform_feature_engineering(perform_feature_engineering):
 #     y_test_preds_rf,
 # )
 
+def test_feature_importance_plot(feature_importance_plot):
+    """
+    test feature_importance_plot
+    """
+
+    df = import_data("./data/bank_data.csv")
+
+    encoded_df = encoder_helper(df, category_lst, target)
+
+    # train_test_values = perform_feature_engineering(df)
+    train_X, test_X, train_y, test_y = perform_feature_engineering(
+        encoded_df, keep_cols, target
+    )
+
+    cv_rfc = joblib.load('models\\rfc_model_train.pkl')
+    feature_importance_plot(cv_rfc, test_X,'images/random_forest_feature_importance.png')
+
+    try:
+        assert os.path.exists("images/random_forest_feature_importance.png")
+        logging.info("Testing feature_importance_plot - image saved: SUCCESS")
+    except AssertionError as err:
+        logging.error("Testing feature_importance_plot - Images saved: file(s) not found")
+        raise err
     
 
 def test_train_models(train_models):
@@ -186,10 +213,12 @@ def test_train_models(train_models):
         raise err
 
 
+
 if __name__ == "__main__":
     test_import()
     test_eda()
     test_encoder_helper(encoder_helper)
     test_perform_feature_engineering(perform_feature_engineering)
+    test_feature_importance_plot(feature_importance_plot)
     # test_train_models(train_models)
     print("Testing complete: see logs in /logs folder!")
