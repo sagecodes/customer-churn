@@ -1,3 +1,11 @@
+'''
+this script is used to test the functions in the churn_library.py file
+
+
+author: @sagecodes
+date: 03/19/2023
+'''
+
 import logging
 import os
 
