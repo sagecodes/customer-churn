@@ -85,6 +85,7 @@ def perform_eda(df):
     histplot = sns.histplot(df["Total_Trans_Ct"], stat="density", kde=True)
     fig = histplot.get_figure()
     fig.savefig("images/Total_Trans_Ct.png")
+    plt.close()
     print("saved total transaction graph at: images/Total_Trans_Ct.png")
 
     # pairwise correlation
@@ -96,6 +97,7 @@ def perform_eda(df):
         linewidths=2)
     fig = corr_plot.get_figure()
     fig.savefig("images/correlation.png")
+    plt.close()
     print("saved correlation graph at: images/correlation.png")
 
 
