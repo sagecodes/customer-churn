@@ -16,7 +16,7 @@ import pandas as pd
 import seaborn as sns
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, plot_roc_curve
 from sklearn.model_selection import GridSearchCV, train_test_split
 
 sns.set()
@@ -70,14 +70,19 @@ def perform_eda(df):
     print("saved Attrition graph at: images/Attrition_Flag_Existing_Customer.png")
 
     # save graph: Customer_Age
+    fig = plt.figure(figsize=(20, 10))
     plt.figure(figsize=(20, 10))
     df["Customer_Age"].hist()
     plt.savefig("images/Customer_age.png")
     plt.close(fig)
     print("saved Customer Age graph at: images/Customer_Age.png")
 
+    fig = plt.figure(figsize=(20, 10))
     plt.figure(figsize=(20, 10))
     df.Marital_Status.value_counts("normalize").plot(kind="bar")
+    fig.savefig("images/Marital_Status.png")
+    plt.close()
+    print("saved total transaction graph at: images/Marital_Status.png")
 
     plt.figure(figsize=(20, 10))
     # Show distributions of 'Total_Trans_Ct' and add a smooth curve obtained
