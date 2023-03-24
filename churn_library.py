@@ -66,19 +66,17 @@ def perform_eda(df):
     fig = plt.figure(figsize=(20, 10))
     df["Churn"].hist()
     plt.savefig("images/Attrition_Flag_Existing_Customer.png")
-    plt.close(fig)
+    plt.close()
     print("saved Attrition graph at: images/Attrition_Flag_Existing_Customer.png")
 
     # save graph: Customer_Age
     fig = plt.figure(figsize=(20, 10))
-    plt.figure(figsize=(20, 10))
     df["Customer_Age"].hist()
     plt.savefig("images/Customer_age.png")
-    plt.close(fig)
+    plt.close()
     print("saved Customer Age graph at: images/Customer_Age.png")
 
     fig = plt.figure(figsize=(20, 10))
-    plt.figure(figsize=(20, 10))
     df.Marital_Status.value_counts("normalize").plot(kind="bar")
     fig.savefig("images/Marital_Status.png")
     plt.close()
@@ -197,7 +195,7 @@ def classification_report_image(
     print(classification_report(y_train, y_train_preds_rf))
 
     # create figure to save
-    # fig = plt.figure(figsize=(20,10))
+    fig = plt.figure(figsize=(20,10))
 
     plt.rc("figure", figsize=(6, 6))
     plt.text(
