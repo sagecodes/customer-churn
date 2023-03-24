@@ -195,9 +195,9 @@ def classification_report_image(
     print(classification_report(y_train, y_train_preds_rf))
 
     # create figure to save
-    fig = plt.figure(figsize=(20,10))
+    fig = plt.figure(figsize=(6,6))
 
-    plt.rc("figure", figsize=(6, 6))
+    # plt.rc("figure", figsize=(6, 6))
     plt.text(
         0.01,
         1.0,
@@ -230,7 +230,8 @@ def classification_report_image(
     plt.savefig("images/random_forest_classification_report.png")
     plt.close()
 
-    plt.rc("figure", figsize=(6, 6))
+    fig = plt.figure(figsize=(6,6))
+    # plt.rc("figure", figsize=(6, 6))
     plt.text(
         0.01,
         1.0,
