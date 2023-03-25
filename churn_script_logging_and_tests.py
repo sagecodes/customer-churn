@@ -308,5 +308,5 @@ if __name__ == "__main__":
     test_feature_importance_plot(feature_importance_plot)
     test_save_roc_curve(save_roc_curve)
     test_shap_values_plot(shap_values_plot)
-    # test_train_models(train_models)
+    test_train_models(train_models)
     print("Testing complete: see logs in /logs folder!")
