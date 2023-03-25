@@ -9,6 +9,7 @@ date: 03/12/2023
 ###########################################################
 import os
 
+import shap
 import joblib
 import matplotlib.pyplot as plt
 import numpy as np
@@ -327,6 +328,28 @@ def save_roc_curve(lrc_model, rfc_model, X_test, y_test):
     plt.savefig("images/roc_curve_comparison.png")
     plt.close()
     print("ROC comparison saved to: images/roc_curve_comparison.png")
+
+
+def shap_values_plot(model, X_test):
+    """
+    creates and stores the shap values plot in output_pth
+    input:
+            model: model object containing feature_importances_
+            X_data: pandas dataframe of X values
+            output_pth: path to store the figure
+
+    output:
+             None
+    """
+    print("creating shap values plot this may take a while...")
+    explainer = shap.TreeExplainer(model)
+    shap_values = explainer.shap_values(X_test)
+    # fig = plt.figure(figsize=(15, 8))
+    # shap.summary_plot(shap_values, X_test, plot_type="bar")
+    fig = shap.summary_plot(shap_values, X_test, plot_type="bar", show=False)
+    plt.savefig("images/shap_values.png",dpi=300, bbox_inches='tight')
+    plt.close()
+    print("shap values plot saved to images/shap_values.png")
 
 
 def train_models(X_train, X_test, y_train, y_test):

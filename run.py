@@ -21,6 +21,7 @@ from churn_library import (
     perform_feature_engineering,
     train_models,
     save_roc_curve,
+    shap_values_plot,
     classification_report_image,
 )
 
@@ -77,14 +78,16 @@ X_train, X_test, y_train, y_test = perform_feature_engineering(
 # %% train_models
 train_models(X_train, X_test, y_train, y_test)
 
-
-# %% feature imoprtance for random forest
-cv_rfc = joblib.load("models\\rfc_model_train.pkl")
-feature_importance_plot(cv_rfc, X_test, "images/random_forest_feature_importance.png")
-
-# %%
+# %% load trained models
 cv_rfc = joblib.load("models\\rfc_model_train.pkl")
 cv_lr = joblib.load("models\\logistic_model_train.pkl")
+
+# %% feature imoprtance for random forest
+feature_importance_plot(cv_rfc, X_test, "images/random_forest_feature_importance.png")
+
+# %% plot & save roc curves
 save_roc_curve(cv_lr, cv_rfc, X_test, y_test)
 
-# %%
+# %% save shap values
+shap_values_plot(cv_rfc, X_test)
+
