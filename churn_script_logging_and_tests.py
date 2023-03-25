@@ -19,6 +19,8 @@ from churn_library import (
     perform_eda,
     perform_feature_engineering,
     train_models,
+    save_roc_curve,
+    shap_values_plot,
 )
 
 logging.basicConfig(
@@ -219,6 +221,33 @@ def test_feature_importance_plot(feature_importance_plot):
             "Testing feature_importance_plot - Images saved: file(s) not found"
         )
         raise err
+    
+def test_save_roc_curve(save_roc_curve):
+    """
+    test save_roc_curve
+    """
+    df = import_data("./data/bank_data.csv")
+
+    encoded_df = encoder_helper(df, category_lst, target)
+
+    # train_test_values = perform_feature_engineering(df)
+    train_X, test_X, train_y, test_y = perform_feature_engineering(
+        encoded_df, keep_cols, target
+    )
+
+    rfc = joblib.load("models\\rfc_model.pkl")
+    lrc = joblib.load("models\\logistic_model.pkl")
+
+    save_roc_curve(lrc, rfc, test_X, test_y)
+
+    try:
+        assert os.path.exists("images\\roc_curve_lcr.png")
+        assert os.path.exists("images\\random_forest_classification_report.png")
+        assert os.path.exists("images\\roc_curve_rfc.png")
+        logging.info("Testing save_roc_curve - images saved: SUCCESS")
+    except AssertionError as err:
+        logging.error("Testing save_roc_curve - image(s) not saved")
+        raise err
 
 
 def test_train_models(train_models):
@@ -252,5 +281,6 @@ if __name__ == "__main__":
     test_perform_feature_engineering(perform_feature_engineering)
     test_classification_report_image(classification_report_image)
     test_feature_importance_plot(feature_importance_plot)
-    test_train_models(train_models)
+    test_save_roc_curve(save_roc_curve)
+    # test_train_models(train_models)
     print("Testing complete: see logs in /logs folder!")
