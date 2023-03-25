@@ -9,9 +9,10 @@ author: @sagecodes
 date: 03/13/2023
 
 """
+# %% Import libraries and churn library functions
 import joblib
 
-# %% Import libraries and churn library functions
+
 from churn_library import (
     encoder_helper,
     feature_importance_plot,
@@ -19,6 +20,8 @@ from churn_library import (
     perform_eda,
     perform_feature_engineering,
     train_models,
+    save_roc_curve,
+    classification_report_image,
 )
 
 # %% Import data
@@ -78,3 +81,10 @@ train_models(X_train, X_test, y_train, y_test)
 # %% feature imoprtance for random forest
 cv_rfc = joblib.load("models\\rfc_model_train.pkl")
 feature_importance_plot(cv_rfc, X_test, "images/random_forest_feature_importance.png")
+
+# %%
+cv_rfc = joblib.load("models\\rfc_model_train.pkl")
+cv_lr = joblib.load("models\\logistic_model_train.pkl")
+save_roc_curve(cv_lr, cv_rfc, X_test, y_test)
+
+# %%

@@ -196,8 +196,6 @@ def classification_report_image(
 
     # create figure to save
     fig = plt.figure(figsize=(6,6))
-
-    # plt.rc("figure", figsize=(6, 6))
     plt.text(
         0.01,
         1.0,
@@ -231,7 +229,6 @@ def classification_report_image(
     plt.close()
 
     fig = plt.figure(figsize=(6,6))
-    # plt.rc("figure", figsize=(6, 6))
     plt.text(
         0.01,
         1.0,
@@ -296,6 +293,40 @@ def feature_importance_plot(model, X_data, output_pth):
     plt.close()
 
     print(f"feature importance plot saved to {output_pth}")
+
+
+def save_roc_curve(lrc_model,rfc_model, X_test, y_test):
+    """
+    creates and stores the ROC curve in output_pth
+    input:
+            model: sklearn model object 
+            X_test: list of X test values
+            y_test: list of y test values
+            output_pth: path to save the figure
+
+    output:
+            None
+    """
+    # save logistic regression roc curve
+    fig = plt.figure(figsize=(6,6))
+    lrc_plot = plot_roc_curve(lrc_model, X_test, y_test)
+    plt.savefig("images/roc_curve_lcr.png")
+    plt.close()
+
+    # save random forest roc curve
+    fig = plt.figure(figsize=(6,6))
+    rfc_plot = plot_roc_curve(rfc_model, X_test, y_test)
+    plt.savefig("images/roc_curve_rfv.png")
+    plt.close()
+    
+    # save comparison of roc curves
+    fig = plt.figure(figsize=(15, 8))
+    ax = plt.gca()
+    rfc_disp = plot_roc_curve(rfc_model, X_test, y_test, ax=ax, alpha=0.8)
+    lrc_plot.plot(ax=ax, alpha=0.8)
+    plt.savefig("images/roc_curve_comparison.png")
+    plt.close()
+    print("ROC comparison saved to: images/roc_curve_comparison.png")
 
 
 def train_models(X_train, X_test, y_train, y_test):
