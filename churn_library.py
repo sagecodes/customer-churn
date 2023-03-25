@@ -2,7 +2,7 @@
 This library contains functions for the churn project
 
 author: @sagecodes
-date: 03/12/2023
+date: 03/25/2023
 """
 
 # import libraries
@@ -336,7 +336,6 @@ def shap_values_plot(model, X_test):
     input:
             model: model object containing feature_importances_
             X_data: pandas dataframe of X values
-            output_pth: path to store the figure
 
     output:
              None

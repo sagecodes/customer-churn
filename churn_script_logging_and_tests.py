@@ -1,9 +1,10 @@
 '''
 this script is used to test the functions in the churn_library.py file
 
+to run this script, use the command: python churn_script_logging_and_tests.py
 
 author: @sagecodes
-date: 03/19/2023
+date: 03/25/2023
 '''
 
 import logging
