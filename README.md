@@ -80,8 +80,9 @@ This will run the functions in churn_library.py and save the results in the logs
 
 
 --
-How do you run your files? What should happen when you run your files?
-
+A few other libraries used from experience to help make the code cleaner:
+- [black](https://github.com/psf/black)
+- [isort](https://pycqa.github.io/isort/)
 
 
 
