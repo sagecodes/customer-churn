@@ -295,14 +295,14 @@ def feature_importance_plot(model, X_data, output_pth):
     print(f"feature importance plot saved to {output_pth}")
 
 
-def save_roc_curve(lrc_model,rfc_model, X_test, y_test):
+def save_roc_curve(lrc_model, rfc_model, X_test, y_test):
     """
     creates and stores the ROC curve in output_pth
     input:
-            model: sklearn model object 
+            lrc_model: logistic regression model
+            rfc_model: random forest model
             X_test: list of X test values
             y_test: list of y test values
-            output_pth: path to save the figure
 
     output:
             None
