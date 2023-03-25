@@ -248,6 +248,30 @@ def test_save_roc_curve(save_roc_curve):
     except AssertionError as err:
         logging.error("Testing save_roc_curve - image(s) not saved")
         raise err
+    
+def test_shap_values_plot(shap_values_plot):
+    """
+    test shap_values_plot
+    """
+    df = import_data("./data/bank_data.csv")
+
+    encoded_df = encoder_helper(df, category_lst, target)
+
+    # train_test_values = perform_feature_engineering(df)
+    train_X, test_X, train_y, test_y = perform_feature_engineering(
+        encoded_df, keep_cols, target
+    )
+
+    rfc = joblib.load("models\\rfc_model.pkl")
+
+    shap_values_plot(rfc, test_X)
+
+    try:
+        assert os.path.exists("images\\shap_values.png")
+        logging.info("Testing shap_values_plot - image saved: SUCCESS")
+    except AssertionError as err:
+        logging.error("Testing shap_values_plot - image not saved")
+        raise err
 
 
 def test_train_models(train_models):
@@ -282,5 +306,6 @@ if __name__ == "__main__":
     test_classification_report_image(classification_report_image)
     test_feature_importance_plot(feature_importance_plot)
     test_save_roc_curve(save_roc_curve)
+    test_shap_values_plot(shap_values_plot)
     # test_train_models(train_models)
     print("Testing complete: see logs in /logs folder!")

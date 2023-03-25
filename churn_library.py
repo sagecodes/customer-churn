@@ -317,7 +317,7 @@ def save_roc_curve(lrc_model, rfc_model, X_test, y_test):
     # save random forest roc curve
     fig = plt.figure(figsize=(6,6))
     rfc_plot = plot_roc_curve(rfc_model, X_test, y_test)
-    plt.savefig("images/roc_curve_rfv.png")
+    plt.savefig("images/roc_curve_rfc.png")
     plt.close()
     
     # save comparison of roc curves
