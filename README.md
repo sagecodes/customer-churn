@@ -1,15 +1,11 @@
 # Predict Customer Churn
 
 ## Project Description
-This project is part of the Udacity Machine Learning DevOps Engineer Nanodegree. The goal of this project is to write clean code to predict customer churn of a telecom company. The data set was originally provided by IBM. It contains information about customers who left the company within the last month. The data set includes information about:
+This project is part of the Udacity Machine Learning DevOps Engineer Nanodegree. The goal of this project is to write clean code to predict customer churn of a credit card company (bank). The dataset was originally provided by analyttica. It contains information about customers who left the bank. The data set includes information about:
 
-* Customers who left within the last month – the column is called Churn
+10,000 customers mentioning their age, salary, marital_status, credit card limit, credit card category, etc.
 
-* Services that each customer has signed up for – phone, multiple lines, internet, online security, online backup, device protection, tech support, and streaming TV and movies
-
-* Customer account information – how long they’ve been a customer, contract, payment method, paperless billing, monthly charges, and total charges
-
-Find more information about the original data set on Kaggle: [Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
+Find more information about the original data set on Kaggle: [Credit card customer churn](https://www.kaggle.com/datasets/sakshigoyal7/credit-card-customers/code)
 
 
 ## Files and data description
