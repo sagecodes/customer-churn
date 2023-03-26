@@ -1,28 +1,21 @@
-'''
+"""
 this script is used to test the functions in the churn_library.py file
 
 to run this script, use the command: python churn_script_logging_and_tests.py
 
 author: @sagecodes
 date: 03/25/2023
-'''
+"""
 
 import logging
 import os
 
 import joblib
 
-from churn_library import (
-    classification_report_image,
-    encoder_helper,
-    feature_importance_plot,
-    import_data,
-    perform_eda,
-    perform_feature_engineering,
-    train_models,
-    save_roc_curve,
-    shap_values_plot,
-)
+from churn_library import (classification_report_image, encoder_helper,
+                           feature_importance_plot, import_data, perform_eda,
+                           perform_feature_engineering, save_roc_curve,
+                           shap_values_plot, train_models)
 
 logging.basicConfig(
     filename="./logs/churn_library.log",
@@ -65,7 +58,7 @@ keep_cols = [
     "Card_Category_Churn",
 ]
 
-target = "Churn"
+TARGET = "Churn"
 
 # test functions
 ###########################################################
@@ -76,15 +69,15 @@ def test_import():
     test data import - this example is completed for you to assist with the other test functions
     """
     try:
-        df = import_data("./data/bank_data.csv")
+        bank_df = import_data("./data/bank_data.csv")
         logging.info("Testing import_data: SUCCESS")
     except FileNotFoundError as err:
         logging.error("Testing import_eda: The file wasn't found")
         raise err
 
     try:
-        assert df.shape[0] > 0
-        assert df.shape[1] > 0
+        assert bank_df.shape[0] > 0
+        assert bank_df.shape[1] > 0
     except AssertionError as err:
         logging.error(
             "Testing import_data: The file doesn't appear to have rows and columns"
@@ -96,9 +89,9 @@ def test_eda():
     """
     test perform eda function
     """
-    df = import_data("./data/bank_data.csv")
+    bank_df = import_data("./data/bank_data.csv")
     try:
-        perform_eda(df)
+        perform_eda(bank_df)
         assert os.path.exists("./images/Attrition_Flag_Existing_Customer.png")
         assert os.path.exists("./images/Customer_Age.png")
         assert os.path.exists("./images/Total_Trans_Ct.png")
@@ -113,13 +106,13 @@ def test_encoder_helper(encoder_helper):
     """
     test encoder helper
     """
-    df = import_data("./data/bank_data.csv")
+    bank_df = import_data("./data/bank_data.csv")
 
-    encoded_df = encoder_helper(df, category_lst, target)
+    encoded_bank_df = encoder_helper(bank_df, category_lst, TARGET)
 
     for col in category_lst:
         try:
-            assert col + "_" + target in encoded_df.columns
+            assert col + "_" + TARGET in encoded_bank_df.columns
             # logging.info("Testing encoder_helper: SUCCESS")
         except AssertionError as err:
             logging.error("Testing encoder_helper: missing column(s)")
@@ -131,13 +124,13 @@ def test_perform_feature_engineering(perform_feature_engineering):
     """
     test perform_feature_engineering
     """
-    df = import_data("./data/bank_data.csv")
+    bank_df = import_data("./data/bank_data.csv")
 
-    encoded_df = encoder_helper(df, category_lst, target)
+    encoded_bank_df = encoder_helper(bank_df, category_lst, TARGET)
 
-    # train_test_values = perform_feature_engineering(df)
+    # train_test_values = perform_feature_engineering(bank_df)
     train_X, test_X, train_y, test_y = perform_feature_engineering(
-        encoded_df, keep_cols, target
+        encoded_bank_df, keep_cols, TARGET
     )
 
     try:
@@ -159,13 +152,13 @@ def test_classification_report_image(classification_report_image):
     """
     test classification_report_image
     """
-    df = import_data("./data/bank_data.csv")
+    bank_df = import_data("./data/bank_data.csv")
 
-    encoded_df = encoder_helper(df, category_lst, target)
+    encoded_bank_df = encoder_helper(bank_df, category_lst, TARGET)
 
-    # train_test_values = perform_feature_engineering(df)
+    # train_test_values = perform_feature_engineering(bank_df)
     X_train, X_test, y_train, y_test = perform_feature_engineering(
-        encoded_df, keep_cols, target
+        encoded_bank_df, keep_cols, TARGET
     )
 
     cv_rfc = joblib.load("models\\rfc_model.pkl")
@@ -187,9 +180,12 @@ def test_classification_report_image(classification_report_image):
     )
 
     try:
-        assert os.path.exists("images\\logistic_regression_classification_report.png")
-        assert os.path.exists("images\\random_forest_classification_report.png")
-        logging.info("Testing classification_report_image - images saved: SUCCESS")
+        assert os.path.exists(
+            "images\\logistic_regression_classification_report.png")
+        assert os.path.exists(
+            "images\\random_forest_classification_report.png")
+        logging.info(
+            "Testing classification_report_image - images saved: SUCCESS")
     except AssertionError as err:
         logging.error("Testing classification_report_image - image not saved")
         raise err
@@ -200,13 +196,13 @@ def test_feature_importance_plot(feature_importance_plot):
     test feature_importance_plot
     """
 
-    df = import_data("./data/bank_data.csv")
+    bank_df = import_data("./data/bank_data.csv")
 
-    encoded_df = encoder_helper(df, category_lst, target)
+    encoded_bank_df = encoder_helper(bank_df, category_lst, TARGET)
 
-    # train_test_values = perform_feature_engineering(df)
+    # train_test_values = perform_feature_engineering(bank_df)
     train_X, test_X, train_y, test_y = perform_feature_engineering(
-        encoded_df, keep_cols, target
+        encoded_bank_df, keep_cols, TARGET
     )
 
     cv_rfc = joblib.load("models\\rfc_model.pkl")
@@ -222,18 +218,19 @@ def test_feature_importance_plot(feature_importance_plot):
             "Testing feature_importance_plot - Images saved: file(s) not found"
         )
         raise err
-    
+
+
 def test_save_roc_curve(save_roc_curve):
     """
     test save_roc_curve
     """
-    df = import_data("./data/bank_data.csv")
+    bank_df = import_data("./data/bank_data.csv")
 
-    encoded_df = encoder_helper(df, category_lst, target)
+    encoded_bank_df = encoder_helper(bank_df, category_lst, TARGET)
 
-    # train_test_values = perform_feature_engineering(df)
+    # train_test_values = perform_feature_engineering(bank_df)
     train_X, test_X, train_y, test_y = perform_feature_engineering(
-        encoded_df, keep_cols, target
+        encoded_bank_df, keep_cols, TARGET
     )
 
     rfc = joblib.load("models\\rfc_model.pkl")
@@ -243,24 +240,26 @@ def test_save_roc_curve(save_roc_curve):
 
     try:
         assert os.path.exists("images\\roc_curve_lcr.png")
-        assert os.path.exists("images\\random_forest_classification_report.png")
+        assert os.path.exists(
+            "images\\random_forest_classification_report.png")
         assert os.path.exists("images\\roc_curve_rfc.png")
         logging.info("Testing save_roc_curve - images saved: SUCCESS")
     except AssertionError as err:
         logging.error("Testing save_roc_curve - image(s) not saved")
         raise err
-    
+
+
 def test_shap_values_plot(shap_values_plot):
     """
     test shap_values_plot
     """
-    df = import_data("./data/bank_data.csv")
+    bank_df = import_data("./data/bank_data.csv")
 
-    encoded_df = encoder_helper(df, category_lst, target)
+    encoded_bank_df = encoder_helper(bank_df, category_lst, TARGET)
 
-    # train_test_values = perform_feature_engineering(df)
+    # train_test_values = perform_feature_engineering(bank_df)
     train_X, test_X, train_y, test_y = perform_feature_engineering(
-        encoded_df, keep_cols, target
+        encoded_bank_df, keep_cols, TARGET
     )
 
     rfc = joblib.load("models\\rfc_model.pkl")
@@ -279,12 +278,12 @@ def test_train_models(train_models):
     """
     test train_models
     """
-    df = import_data("./data/bank_data.csv")
+    bank_df = import_data("./data/bank_data.csv")
 
-    encoded_df = encoder_helper(df, category_lst, target)
+    encoded_bank_df = encoder_helper(bank_df, category_lst, TARGET)
 
     train_X, test_X, train_y, test_y = perform_feature_engineering(
-        encoded_df, keep_cols, target
+        encoded_bank_df, keep_cols, TARGET
     )
 
     train_models(train_X, test_X, train_y, test_y)

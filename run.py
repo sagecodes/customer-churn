@@ -12,18 +12,10 @@ date: 03/25/2023
 # %% Import libraries and churn library functions
 import joblib
 
-
-from churn_library import (
-    encoder_helper,
-    feature_importance_plot,
-    import_data,
-    perform_eda,
-    perform_feature_engineering,
-    train_models,
-    save_roc_curve,
-    shap_values_plot,
-    classification_report_image,
-)
+from churn_library import (encoder_helper, feature_importance_plot,
+                           import_data, perform_eda,
+                           perform_feature_engineering, save_roc_curve,
+                           shap_values_plot, train_models)
 
 # %% Import data
 data_df = import_data("./data/bank_data.csv")
@@ -90,4 +82,3 @@ save_roc_curve(cv_lr, cv_rfc, X_test, y_test)
 
 # %% save shap values
 shap_values_plot(cv_rfc, X_test)
-

@@ -9,12 +9,12 @@ date: 03/25/2023
 ###########################################################
 import os
 
-import shap
 import joblib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+import shap
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, plot_roc_curve
@@ -196,7 +196,7 @@ def classification_report_image(
     print(classification_report(y_train, y_train_preds_rf))
 
     # create figure to save
-    fig = plt.figure(figsize=(6,6))
+    fig = plt.figure(figsize=(6, 6))
     plt.text(
         0.01,
         1.0,
@@ -229,7 +229,7 @@ def classification_report_image(
     plt.savefig("images/random_forest_classification_report.png")
     plt.close()
 
-    fig = plt.figure(figsize=(6,6))
+    fig = plt.figure(figsize=(6, 6))
     plt.text(
         0.01,
         1.0,
@@ -309,17 +309,17 @@ def save_roc_curve(lrc_model, rfc_model, X_test, y_test):
             None
     """
     # save logistic regression roc curve
-    fig = plt.figure(figsize=(6,6))
+    fig = plt.figure(figsize=(6, 6))
     lrc_plot = plot_roc_curve(lrc_model, X_test, y_test)
     plt.savefig("images/roc_curve_lcr.png")
     plt.close()
 
     # save random forest roc curve
-    fig = plt.figure(figsize=(6,6))
+    fig = plt.figure(figsize=(6, 6))
     rfc_plot = plot_roc_curve(rfc_model, X_test, y_test)
     plt.savefig("images/roc_curve_rfc.png")
     plt.close()
-    
+
     # save comparison of roc curves
     fig = plt.figure(figsize=(15, 8))
     ax = plt.gca()
@@ -346,7 +346,7 @@ def shap_values_plot(model, X_test):
     # fig = plt.figure(figsize=(15, 8))
     # shap.summary_plot(shap_values, X_test, plot_type="bar")
     fig = shap.summary_plot(shap_values, X_test, plot_type="bar", show=False)
-    plt.savefig("images/shap_values.png",dpi=300, bbox_inches='tight')
+    plt.savefig("images/shap_values.png", dpi=300, bbox_inches="tight")
     plt.close()
     print("shap values plot saved to images/shap_values.png")
 
